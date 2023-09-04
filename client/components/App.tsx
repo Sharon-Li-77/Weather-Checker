@@ -12,6 +12,7 @@ function App() {
   }
 
   console.log('data', data)
+  // console.log('weather', data.weathercode[selected])
 
   return (
     <>
@@ -37,9 +38,14 @@ function App() {
       <br />
       {data && data.temperature_2m && data.temperature_2m[selected] && (
         <div>
+          temperature:
           {data.temperature_2m[selected]}
           <img src="./public/designs/cold.png" alt="cold-pic" />
         </div>
+      )}
+
+      {data && data.weathercode && data.weathercode[selected] && (
+        <p className="weathercode">{data.weathercode[selected]}</p>
       )}
     </>
   )
