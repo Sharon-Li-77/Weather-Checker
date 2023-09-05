@@ -16,36 +16,58 @@ function App() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <select
-        name="weather"
-        id="weather"
-        value={selected}
-        onChange={handlechange}
-      >
-        {data &&
-          !isLoading &&
-          data.time.map((p, idx) => (
-            <option key={idx} value={idx}>
-              {p}
-            </option>
-          ))}
-      </select>
-      <br />
-      <br />
-      {data && data.temperature_2m && data.temperature_2m[selected] && (
-        <div>
-          temperature:
-          {data.temperature_2m[selected]}
-          <img src="./public/designs/cold.png" alt="cold-pic" />
-        </div>
-      )}
+      <h1> Your Weather-Checker ! 🌞 </h1>
 
-      {data && data.weathercode && data.weathercode[selected] && (
-        <p className="weathercode">{data.weathercode[selected]}</p>
+      <div>
+        <select
+          name="weather"
+          id="weather"
+          value={selected}
+          onChange={handlechange}
+          className="date"
+        >
+          {data &&
+            !isLoading &&
+            data.time.map((p, idx) => (
+              <option key={idx} value={idx}>
+                {p}
+              </option>
+            ))}
+        </select>
+        <br />
+        <br />
+        {data && data.weathercode && data.weathercode[selected] && (
+          <p className="weathercode">
+            {data.weathercode[selected] >= 0 &&
+            data.weathercode[selected] <= 10 ? (
+              <div>
+                <img
+                  className="picture"
+                  src="./public/designs/sun.jpg"
+                  alt="csun-pic"
+                />
+              </div>
+            ) : data.weathercode[selected] > 10 &&
+              data.weathercode[selected] <= 60 ? (
+              <img src="./public/designs/sun-cloud.jpg" alt="cloud-pic" />
+            ) : data.weathercode[selected] > 61 &&
+              data.weathercode[selected] <= 84 ? (
+              <img src="./public/designs/wind.jpg" alt="wind-pic" />
+            ) : data.weathercode[selected] >= 85 &&
+              data.weathercode[selected] <= 100 ? (
+              <img src="./public/designs/snow.gif" alt="snow-pic" />
+            ) : (
+              ''
+            )}
+          </p>
+        )}
+      </div>
+
+      {data && data.temperature_2m && data.temperature_2m[selected] && (
+        <div className="temperature">
+          Temperature:
+          {data.temperature_2m[selected]}°
+        </div>
       )}
     </>
   )
